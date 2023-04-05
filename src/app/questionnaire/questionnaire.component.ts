@@ -6,13 +6,15 @@ import { QuestionnaireService } from '../service/questionnaire.service';
   templateUrl: './questionnaire.component.html',
   styleUrls: ['./questionnaire.component.css']
 })
-export class QuestionnaireComponent implements OnInit{
+export class QuestionnaireComponent implements OnInit {
   public questionsList: any = [];
   public currentQuestion: number = 0;
   public correctAnswers: number = 0;
   public incorrectAnswers: number = 0;
-  progress: string = "0";
-  constructor(private questionnaireService : QuestionnaireService) {  }
+  public questionsAttempted: number = 0;
+  public progress: string = "0";
+  isCompleted: boolean = false;
+  constructor(private questionnaireService: QuestionnaireService) { }
 
   ngOnInit(): void {
     this.getAllQuestions();
@@ -35,12 +37,19 @@ export class QuestionnaireComponent implements OnInit{
   }
 
   answer(currentQuestion: number, option: any) {
+    if (currentQuestion === this.questionsList.length) {
+      this.isCompleted = true;
+    }
+
     if (option.correct) {
       this.correctAnswers++;
     } else {
       this.incorrectAnswers++;
     }
-    this.currentQuestion++;
+    if (this.currentQuestion != this.questionsList.length - 1) {
+      this.currentQuestion++;
+    }
+    this.questionsAttempted++;
     this.getProgress();
   }
 
@@ -49,6 +58,9 @@ export class QuestionnaireComponent implements OnInit{
     this.currentQuestion = 0;
     this.correctAnswers = 0;
     this.incorrectAnswers = 0;
+    this.progress = "0";
+    this.questionsAttempted = 0;
+    this.isCompleted = false;
   }
 
   getProgress() {
