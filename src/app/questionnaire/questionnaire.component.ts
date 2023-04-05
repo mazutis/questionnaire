@@ -11,6 +11,7 @@ export class QuestionnaireComponent implements OnInit{
   public currentQuestion: number = 0;
   public correctAnswers: number = 0;
   public incorrectAnswers: number = 0;
+  progress: string = "0";
   constructor(private questionnaireService : QuestionnaireService) {  }
 
   ngOnInit(): void {
@@ -39,8 +40,20 @@ export class QuestionnaireComponent implements OnInit{
     } else {
       this.incorrectAnswers++;
     }
-
     this.currentQuestion++;
+    this.getProgress();
+  }
+
+  resetQuestionnaire() {
+    this.getAllQuestions();
+    this.currentQuestion = 0;
+    this.correctAnswers = 0;
+    this.incorrectAnswers = 0;
+  }
+
+  getProgress() {
+    this.progress = ((this.currentQuestion / this.questionsList.length) * 100).toString();
+    return this.progress;
   }
 
 }
