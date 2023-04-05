@@ -30,10 +30,12 @@ export class QuestionnaireComponent implements OnInit {
 
   nextQuestion() {
     this.currentQuestion++;
+    this.getProgress();
   }
 
   previousQuestion() {
     this.currentQuestion--;
+    this.getProgress();
   }
 
   answer(currentQuestion: number, option: any) {

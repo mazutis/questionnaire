@@ -1,7 +1,6 @@
 <div class="container">
   <div class="card">
 
-
     <ng-container *ngIf="!isCompleted">
       <div class="d-flex justify-content-around py-3">
         <div class="questions-remain">
@@ -30,9 +29,9 @@
       </div>
 
       <div class="d-flex justify-content-between">
-        <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i class="fa text-primary fa-chevron-left fa-2x" aria-hidden="true"></i></button>
-        <button class="btn" (click)="resetQuestionnaire()">RESET QUESTIONNAIRE</button>
-        <button [disabled]="currentQuestion === questionsList.length-1" class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-2x" aria-hidden="true"></i></button>
+        <button [disabled]="currentQuestion===0" class="btn btn-info" (click)="previousQuestion()">PREVIOUS</button>
+        <button class="btn btn-secondary" (click)="resetQuestionnaire()">RESET</button>
+        <button [disabled]="currentQuestion === questionsList.length-1" class="btn btn-info" (click)="nextQuestion()">NEXT</button>
       </div>
     </ng-container>
 
@@ -46,7 +45,7 @@
           <p>Question attempted: {{questionsAttempted}} of {{questionsList.length}} </p>
           <p>Answered correct: {{correctAnswers}} </p>
           <p>Answered wrong: {{incorrectAnswers}} </p>
-          <button class="btn" (click)="resetQuestionnaire()">TRY AGAIN</button>
+          <button class="btn btn-info" (click)="resetQuestionnaire()">TRY AGAIN</button>
         </div>
       </div>
     </ng-container>
